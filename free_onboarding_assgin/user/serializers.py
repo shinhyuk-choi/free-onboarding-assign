@@ -12,12 +12,7 @@ class UserSerializer(serializers.ModelSerializer):
         fields = (
             'id',
             'username',
-            'email',
             'password',
-            'first_name',
-            'last_name',
-            'last_login',
-            'date_joined',
         )
 
     def validate_password(self, value):

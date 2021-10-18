@@ -20,8 +20,8 @@ class PostViewSet(viewsets.GenericViewSet):
             raise NotAuthenticated
         if not data['title'] or not data['content']:
             return Response({"error": "title and content are required field."}, status=status.HTTP_400_BAD_REQUEST)
-        Post.objects.create(title=data['title'], content=data['content'], author=request.user)
-        return Response()
+        post = Post.objects.create(title=data['title'], content=data['content'], author=request.user)
+        return Response(self.get_serializer(post).data)
 
     def list(self, request):
         posts = Post.objects.all()
@@ -44,7 +44,7 @@ class PostViewSet(viewsets.GenericViewSet):
 
     def destroy(self, request, pk):
         post = get_object_or_404(Post, id=pk)
-        # if post.author != request.user:
-        #     raise PermissionDenied
+        if post.author != request.user:
+            raise PermissionDenied
         post.delete()
-        return Response('post deleted')
+        return Response('{post deleted}')
