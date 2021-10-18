@@ -21,7 +21,7 @@
 
 ### 회원가입   
 * 호출 예시   
-`curl 127.0.0.1:8000/users/ -d '{"username":"user1", "password":"1111"}' -H "Content-Type: application/json" -X POST`   
+`curl -X POST 'http://127.0.0.1:8000/users/' -d '{"username":"user1", "password":"1111"}' -H "Content-Type: application/json"`   
 * URL   
 `users/`   
 * Method:   
@@ -44,7 +44,7 @@
 
 ### 로그인  
 * 호출 예시   
-`curl 127.0.0.1:8000/users/login/ -d '{"username":"user1", "password":"1111"}' -H "Content-Type:application/json" -X POST`   
+`curl -X POST 'http://127.0.0.1:8000/users/login/' -d '{"username":"user1", "password":"1111"}' -H "Content-Type:application/json"`   
 * URL   
 `users/login/`   
 * Method:   
@@ -91,7 +91,7 @@
 
 ### 게시글 작성   
 * 호출 예시   
-`curl 127.0.0.1:8000/posts/ -d '{"title":"title1", "content":"content1"}' -H "Content-Type:application/json" -H "Authorization:Token {token}" -X POST`   
+`curl -X POST 'http://127.0.0.1:8000/posts/' -d '{"title":"title1", "content":"content1"}' -H "Content-Type:application/json" -H "Authorization:Token {token}"`   
 * URL   
 `posts/`   
 * Method:   
