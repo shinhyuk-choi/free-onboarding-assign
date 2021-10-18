@@ -1,6 +1,15 @@
 # [[위코드 x 원티드] 백엔드 프리온보딩 선발 과제](https://www.notion.so/x-2f1edca34653419d8e109df1816197c2)
 
-- Django RestFramework 사용   
+- Django RestFramework, sqlite3
+# 실행방법
+- 실행 steps.(manage.py가 있는 디렉토리에서)  
+- 1.`$ python3 -m venv venv`
+- 2.`$ source venv/bin/activate`
+- 3.`$ pip install -r requirements.txt`
+- 4.`$ python manage.py migrate`
+- 5.`$ python manage.py runserver`   
+- 6.`curl을 사용하여 각 api를 호출하는 예시는 아래 api명세 확인`
+
 # APIs
 
 ## User
@@ -11,7 +20,8 @@
 ***
 
 ### 회원가입   
-   
+* 호출 예시   
+`curl 127.0.0.1:8000/users/ -d '{"username":"user1", "password":"1111"}' -H "Content-Type: application/json" -X POST`   
 * URL   
 `users/`   
 * Method:   
@@ -33,7 +43,8 @@
 ***
 
 ### 로그인  
-   
+* 호출 예시   
+`curl 127.0.0.1:8000/users/login/ -d '{"username":"user1", "password":"1111"}' -H "Content-Type:application/json" -X POST`   
 * URL   
 `users/login/`   
 * Method:   
@@ -79,7 +90,8 @@
 ***
 
 ### 게시글 작성   
-   
+* 호출 예시   
+`curl 127.0.0.1:8000/posts/ -d '{"title":"title1", "content":"content1"}' -H "Content-Type:application/json" -H "Authorization:Token {token}" -X POST`   
 * URL   
 `posts/`   
 * Method:   
