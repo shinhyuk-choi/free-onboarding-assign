@@ -114,7 +114,8 @@
 ***
 
 ### 게시글 리스트 조회  
-   
+* 호출 예시   
+`curl -L -X GET 'http://127.0.0.1:8000/posts?limit=2&offset=0' -H "Authorization:Token {token}" -H "Content-Type:application/json"`   
 * URL   
 `posts/`   
 * Method:   
