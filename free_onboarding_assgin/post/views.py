@@ -13,8 +13,16 @@ class PostViewSet(viewsets.GenericViewSet):
     serializer_class = PostSerializer
     authentication_classes = [TokenAuthentication]
     permission_classes = [IsAuthenticated]
+    ordering = '-id'
 
     def create(self, request):
+        """
+        POST /posts/
+
+        data params
+        - title(required)
+        - content(required)
+        """
         data = request.data
         if request.user.is_anonymous:
             raise NotAuthenticated
@@ -24,16 +32,29 @@ class PostViewSet(viewsets.GenericViewSet):
         return Response(self.get_serializer(post).data)
 
     def list(self, request):
+        """
+        GET /posts/
+
+        query params
+        - offset
+        - limit
+        """
         posts = Post.objects.all()
         paginator = self.paginator
         paginated_posts = paginator.paginate_queryset(posts, request)
         return paginator.get_paginated_response(self.get_serializer(paginated_posts, many=True).data)
 
     def retrieve(self, request, pk):
+        """
+        GET /posts/{post_id}/
+        """
         post = get_object_or_404(Post, id=pk)
         return Response(self.get_serializer(post).data)
 
     def partial_update(self, request, pk):
+        """
+        PATCH /posts/{post_id}/
+        """
         post = get_object_or_404(Post, id=pk)
         if post.author != request.user:
             raise PermissionDenied
@@ -43,6 +64,9 @@ class PostViewSet(viewsets.GenericViewSet):
         return Response(serializer.data)
 
     def destroy(self, request, pk):
+        """
+        DELETE /posts/{post_id}/
+        """
         post = get_object_or_404(Post, id=pk)
         if post.author != request.user:
             raise PermissionDenied

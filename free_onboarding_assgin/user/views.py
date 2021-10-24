@@ -20,6 +20,13 @@ class UserViewSet(viewsets.GenericViewSet):
         return self.permission_classes
 
     def create(self, request):
+        """
+        POST /users/
+
+        data params
+        - username(required)
+        - password(required)
+        """
         serializer = self.get_serializer(data=request.data)
         serializer.is_valid(raise_exception=True)
         try:
@@ -34,6 +41,13 @@ class UserViewSet(viewsets.GenericViewSet):
 
     @action(detail=False, methods=['POST'])
     def login(self, request):
+        """
+        POST /users/login/
+
+        data params
+        - username(required)
+        - password(required)
+        """
         username = request.data.get('username')
         password = request.data.get('password')
 
@@ -49,6 +63,9 @@ class UserViewSet(viewsets.GenericViewSet):
 
     @action(detail=False, methods=['POST'])
     def logout(self, request):
+        """
+        POST /users/logout/
+        """
         logout(request)
         return Response()
 

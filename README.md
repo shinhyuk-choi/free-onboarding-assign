@@ -1,6 +1,16 @@
 # [[위코드 x 원티드] 백엔드 프리온보딩 선발 과제](https://www.notion.so/x-2f1edca34653419d8e109df1816197c2)
 
 - Django RestFramework, sqlite3
+
+- Pagination
+
+  - drf의 CursorPagination으로 구현하였습니다.
+
+    - 게시판 리스트 조회기능에서 spec상 특별한 sorting에 대한 옵션이 없으므로 Offset 기반의 pagination보다
+      성능적으로 우수한 CursorPagination 선택하였습니다.(게시글의 id 내림차순 기준으로 정렬하였습니다.)
+
+      다음링크에 pagination 비교에대한 공부를 정리했습니다. 
+      [Cursor vs Offset](https://shchoi94.github.io/pagination-cursor-vs-offset/)
 # 실행방법
 - 실행 steps.(manage.py가 있는 디렉토리에서)  
 - 1.`$ python3 -m venv venv`
@@ -8,7 +18,7 @@
 - 3.`$ pip install -r requirements.txt`
 - 4.`$ python manage.py migrate`
 - 5.`$ python manage.py runserver`   
-- 6.`curl을 사용하여 각 api를 호출하는 예시는 아래 api명세 확인`
+- 6.`과제 예시에서 처럼 curl을 사용한다면 각 api를 호출하는 예시는 아래 api명세 확인`
 
 # APIs
 
@@ -37,7 +47,7 @@
        "username": String / User username,   
        "token": String / Token key  
    } 
-  ```      
+  ```
 ***
 
 ***
@@ -60,12 +70,12 @@
        "username": String / User username,   
        "token": String / Token key  
    } 
-  ```      
+  ```
 ***
 
 ***
 ### 로그아웃    
-   
+
 * URL   
 `users/logout/`   
 * Method:   
@@ -77,7 +87,7 @@
 * Response:   
    ```
    
-  ```      
+  ```
 ***
 
 ## Post
@@ -108,7 +118,7 @@
       "author": Int / User id,
       "content": String / Post content  
    } 
-  ```      
+  ```
 ***
 
 ***
@@ -140,12 +150,12 @@
             ...
         ]
     } 
-  ```      
+  ```
 ***
 
 ***
 ### 게시글 조회    
-   
+
 * URL   
 `posts/{post_id}/`   
 * Method:   
@@ -162,12 +172,12 @@
       "author": 2,
       "content": "내용3"
    }
-  ```      
+  ```
 ***
 
 ***
 ### 게시글 수정    
-   
+
 * URL   
 `posts/{post_id}/`   
 * Method:   
@@ -184,12 +194,12 @@
       "author": 2,
       "content": "내용3"
    }
-  ```      
+  ```
 ***
 
 ***
 ### 게시글 삭제    
-   
+
 * URL   
 `posts/{post_id}/`   
 * Method:   
@@ -201,5 +211,6 @@
 * Response:   
    ```
    {post deleted}
-  ```      
+  ```
+
 ***
